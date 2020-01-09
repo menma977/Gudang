@@ -15,11 +15,14 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('route');
+            $table->integer('user');
             $table->string('full_name');
-            $table->string('full_address');
+            $table->text('full_address');
+            $table->string('phone');
             $table->string('number_ktp');
-            $table->string('ktp');
-            $table->string('ktp_and_user');
+            $table->string('ktp')->nullable();
+            $table->string('ktp_and_user')->nullable();
             $table->timestamps();
         });
     }

@@ -15,12 +15,17 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('approved_user')->nullable();
             $table->string('code');
             $table->integer('product');
+            $table->integer('route');
             $table->integer('store');
+            $table->text('description');
             $table->integer('debit');
             $table->integer('credit');
-            $table->string('end');
+            $table->string('total');
+            $table->string('over_due');
+            $table->integer('status'); // 0 : sales order, 1 : delivery , 2 : account receivable, 3 : paid off , 4 : over due, 5 : return
             $table->timestamps();
         });
     }

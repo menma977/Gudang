@@ -16,10 +16,14 @@ class CreateDiscountsTable extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('product');
-            $table->integer('type');
-            $table->integer('quantity');
-            $table->integer('free');
-            $table->integer('total');
+            //if type == 1
+            $table->integer('quantity')->default(0);
+            $table->integer('free')->default(0);
+            //if type == 1//
+            $table->integer('type')->default(0);
+            //if type == 2
+            $table->integer('total')->default(0);
+            //if type == 2//
             $table->timestamps();
         });
     }

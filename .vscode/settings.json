@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "Authenticatable",
+        "Laravel"
+    ],
+    "blade.format.enable": true,
+    "emmet.triggerExpansionOnTab": true
+}
