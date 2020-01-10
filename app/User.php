@@ -2,7 +2,8 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Model\LedgerProduct;
+use App\Model\Route;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -37,4 +38,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Sales()
+    {
+        return $this->hasOne(LedgerProduct::class, 'user', 'id');
+    }
+
+    public function HeadStoreHouse()
+    {
+        return $this->hasOne(LedgerProduct::class, 'approved_storehouse', 'id');
+    }
+
+    public function Admin()
+    {
+        return $this->hasOne(LedgerProduct::class, 'approved_admin', 'id');
+    }
+
+    public function Route()
+    {
+        return $this->hasOne(Route::class, 'id', 'route');
+    }
 }
