@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
         "Authenticatable",
-        "Laravel"
+        "Laravel",
+        "csrf",
+        "endadmin",
+        "endforeach",
+        "endholder"
     ],
     "blade.format.enable": true,
     "emmet.triggerExpansionOnTab": true

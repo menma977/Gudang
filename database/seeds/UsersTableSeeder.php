@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'rule'     => 0,
+            'role'     => 0,
             'name'     => 'holder',
             'username' => 'holder',
             'phone'    => 'holder',
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rule'     => 1,
+            'role'     => 1,
             'name'     => 'admin',
             'username' => 'admin',
             'phone'    => 'admin',
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rule'     => 2,
+            'role'     => 2,
             'name'     => 'headShed',
             'username' => 'headShed',
             'phone'    => 'headShed',
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rule'     => 3,
+            'role'     => 3,
             'name'     => 'shed',
             'username' => 'shed',
             'phone'    => 'shed',
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rule'     => 4,
+            'role'     => 4,
             'name'     => 'sales',
             'username' => 'sales',
             'phone'    => 'sales',

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,28 +32,33 @@ class AppServiceProvider extends ServiceProvider
             $view->with('amount', 5);
         });
 
+        view()->composer('layouts.include.slider', function ($view) {
+            $user = User::whereIn('role', [2, 3, 4, 5])->get();
+            $view->with('users', $user);
+        });
+
         Blade::if('holder', function () {
-            return Auth::user() && Auth::user()->rule == 0 ? true : false;
+            return Auth::user() && Auth::user()->role == 0 ? true : false;
         });
 
         Blade::if('admin', function () {
-            return Auth::user() && Auth::user()->rule == 1 ? true : false;
+            return Auth::user() && Auth::user()->role == 1 ? true : false;
         });
 
         Blade::if('headShed', function () {
-            return Auth::user() && Auth::user()->rule == 2 ? true : false;
+            return Auth::user() && Auth::user()->role == 2 ? true : false;
         });
 
         Blade::if('shed', function () {
-            return Auth::user() && Auth::user()->rule == 3 ? true : false;
+            return Auth::user() && Auth::user()->role == 3 ? true : false;
         });
 
         Blade::if('sales', function () {
-            return Auth::user() && Auth::user()->rule == 4 ? true : false;
+            return Auth::user() && Auth::user()->role == 4 ? true : false;
         });
 
         Blade::if('store', function () {
-            return Auth::user() && Auth::user()->rule == 5 ? true : false;
+            return Auth::user() && Auth::user()->role == 5 ? true : false;
         });
     }
 }
