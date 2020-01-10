@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Model\Route;
+use App\Model\Store;
+use App\User;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,19 @@ class RouteController extends Controller
      */
     public function index()
     {
-        //
+        $routes = Route::all();
+        $routes->map(function ($item) {
+            $item->user = $item->user ? User::find($item->user)->name : 'Belum Memiliki Sales';
+            $item->listStore  = Store::where('route', $item->id)->get();
+
+            return $item;
+        });
+
+        $data = [
+            'routes' => $routes,
+        ];
+
+        return view('route.index', $data);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -24,7 +25,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        if (Auth::user()->role == 0) {
+            $users = User::all();
+        } else {
+            $users = User::whereIn('role', [2, 3, 4, 5])->get();
+        }
+
+        $data = [
+            'users' => $users
+        ];
+        return view('user.index', $data);
     }
 
     /**

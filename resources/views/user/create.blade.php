@@ -30,16 +30,10 @@
                         <label>Role</label>
                         <select class="form-control @error('role') is-invalid @enderror select2" id="role" name="role"
                             style="width: 100%;">
-                            @holder
                             <option value="1" {{ old('role') == 1 ? 'selected': '' }}>Admin</option>
-                            @endholder
-                            @admin
-                            <option value="1" disabled>Admin</option>
                             <option value="2" {{ old('role') == 2 ? 'selected': '' }}>Kepala Gudang</option>
                             <option value="3" {{ old('role') == 3 ? 'selected': '' }}>Pegawai Gudang</option>
                             <option value="4" {{ old('role') == 4 ? 'selected': '' }}>Sales</option>
-                            <option value="5" disabled>Toko</option>
-                            @endadmin
                         </select>
                         @error('role')
                         <span class="invalid-feedback" role="alert">

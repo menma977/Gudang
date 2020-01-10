@@ -40,4 +40,13 @@ Route::middleware('validate')->group(function () {
         Route::get('/delete', 'UserController@delete')->name('delete')->middleware('auth', 'role:0|1');
         Route::post('/destroy', 'UserController@destroy')->name('destroy')->middleware('auth', 'role:0|1');
     });
+
+    Route::group(['prefix' => 'route', 'as' => 'route.'], function () {
+        Route::get('/', 'RouteController@index')->name('index')->middleware('auth', 'role:0|1');
+        Route::get('/create', 'RouteController@create')->name('create')->middleware('auth', 'role:0|1');
+        Route::post('/store', 'RouteController@store')->name('store')->middleware('auth', 'role:0|1');
+        Route::get('/show', 'RouteController@show')->name('show')->middleware('auth');
+        Route::get('/edit/{id}', 'RouteController@edit')->name('edit')->middleware('auth', 'role:0|1');
+        Route::post('/update/{id}', 'RouteController@update')->name('update')->middleware('auth', 'role:0|1');
+    });
 });

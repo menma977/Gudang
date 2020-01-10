@@ -25,29 +25,24 @@
         @csrf
         <div class="card-body">
             <div class="row">
+                @holder
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Role</label>
                         <select class="form-control @error('role') is-invalid @enderror select2" id="role" name="role"
                             style="width: 100%;">
-                            @holder
-                            <option value="1" {{ old('role') == 1 ? 'selected': ($user->role == 2 ? 'selected': '') }}>
+                            <option value="1" {{ old('role') == 1 ? 'selected': ($user->role == 1 ? 'selected': '') }}>
                                 Admin
                             </option>
-                            @endholder
-                            @admin
-                            <option value="1" disabled>Admin</option>
                             <option value="2" {{ old('role') == 2 ? 'selected': ($user->role == 2 ? 'selected': '') }}>
                                 Kepala Gudang
                             </option>
                             <option value="3" {{ old('role') == 3 ? 'selected': ($user->role == 3 ? 'selected': '') }}>
-                                Pegawai
-                                Gudang</option>
+                                Pegawai Gudang
+                            </option>
                             <option value="4" {{ old('role') == 4 ? 'selected': ($user->role == 4 ? 'selected': '') }}>
                                 Sales
                             </option>
-                            <option value="5" disabled>Toko</option>
-                            @endadmin
                         </select>
                         @error('role')
                         <span class="invalid-feedback" role="alert">
@@ -56,7 +51,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-6">
+                @endholder
+                <div class="@holder col-md-6 @else col-md-12 @endholder">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
@@ -161,5 +157,6 @@
         //Initialize Select2 Elements
         $('.select2').select2()
     });
+
 </script>
 @endsection

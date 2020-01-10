@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('amount', 5);
         });
 
-        view()->composer('layouts.include.slider', function ($view) {
+        view()->composer('layouts.admin', function ($view) {
             $user = User::whereIn('role', [2, 3, 4, 5])->get();
             $view->with('users', $user);
         });

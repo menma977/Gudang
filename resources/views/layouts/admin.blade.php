@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{ url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}" rel="stylesheet">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     @yield('endCSS')
 </head>
 
@@ -54,6 +56,57 @@
         </footer>
     </div>
 
+    <div class="modal fade" id="userListModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">List User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body table-responsive">
+                    <table id="userList" class="table table-bordered table-striped">
+                        <thead>
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Jabatan</th>
+                            <th>Edit</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->username }}</td>
+                                @if ($item->role == 0)
+                                <td>Pemilik</td>
+                                @elseif($item->role == 1)
+                                <td>Admin</td>
+                                @elseif($item->role == 2)
+                                <td>Kepala Gudang</td>
+                                @elseif($item->role == 3)
+                                <td>User Gudang</td>
+                                @elseif($item->role == 4)
+                                <td>Sales</td>
+                                @elseif($item->role == 5)
+                                <td>Toko</td>
+                                @endif
+                                <td>
+                                    <a href="{{ route('user.edit', base64_encode($item->id)) }}"
+                                        class="btn btn-block btn-warning btn-xs">Edit</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
@@ -65,6 +118,14 @@
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     <!-- ChartJS -->
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- DataTables -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script>
+        $(function () {
+            $("#userList").DataTable();
+        });
+    </script>
     @yield('endJS')
 </body>
 
