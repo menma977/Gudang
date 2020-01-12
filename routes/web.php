@@ -42,7 +42,7 @@ Route::middleware('validate')->group(function () {
     });
 
     Route::group(['prefix' => 'route', 'as' => 'route.'], function () {
-        Route::get('/', 'RouteController@index')->name('index')->middleware('auth', 'role:0|1');
+        Route::get('/', 'RouteController@index')->name('index')->middleware('auth', 'role:0|1|4');
         Route::get('/create', 'RouteController@create')->name('create')->middleware('auth', 'role:0|1');
         Route::post('/store', 'RouteController@store')->name('store')->middleware('auth', 'role:0|1');
         Route::get('/show', 'RouteController@show')->name('show')->middleware('auth');

@@ -5,6 +5,11 @@ namespace App\Model;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed user
+ * @property mixed description
+ * @property mixed name
+ */
 class Route extends Model
 {
     /**
