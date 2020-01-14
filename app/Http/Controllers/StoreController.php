@@ -2,25 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Route;
 use App\Model\Store;
+use App\User;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class StoreController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
-        //
+        $store = Store::all();
+        $store->map(function ($item) {
+            $item->route = Route::find($item->route);
+            $item->user = User::find($item->user);
+            return $item;
+        });
+
+        $data = [
+            'stores' => $store
+        ];
+
+        return view('store.index', $data);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -30,8 +56,8 @@ class StoreController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -41,8 +67,8 @@ class StoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Store  $store
-     * @return \Illuminate\Http\Response
+     * @param Store $store
+     * @return Response
      */
     public function show(Store $store)
     {
@@ -52,8 +78,8 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Store  $store
-     * @return \Illuminate\Http\Response
+     * @param Store $store
+     * @return Response
      */
     public function edit(Store $store)
     {
@@ -63,9 +89,9 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Store  $store
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Store $store
+     * @return Response
      */
     public function update(Request $request, Store $store)
     {
@@ -75,8 +101,8 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Store  $store
-     * @return \Illuminate\Http\Response
+     * @param Store $store
+     * @return Response
      */
     public function destroy(Store $store)
     {

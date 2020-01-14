@@ -49,4 +49,13 @@ Route::middleware('validate')->group(function () {
         Route::get('/edit/{id}', 'RouteController@edit')->name('edit')->middleware('auth', 'role:0|1');
         Route::post('/update/{id}', 'RouteController@update')->name('update')->middleware('auth', 'role:0|1');
     });
+
+    Route::group(['prefix' => 'store', 'as' => 'store.'], function () {
+        Route::get('/', 'StoreController@index')->name('index')->middleware('auth', 'role:0|1');
+        Route::get('/create', 'StoreController@create')->name('create')->middleware('auth', 'role:0|1');
+        Route::post('/store', 'StoreController@store')->name('store')->middleware('auth', 'role:0|1');
+        Route::get('/show', 'StoreController@show')->name('show')->middleware('auth');
+        Route::get('/edit/{id}', 'StoreController@edit')->name('edit')->middleware('auth', 'role:0|1');
+        Route::post('/update/{id}', 'StoreController@update')->name('update')->middleware('auth', 'role:0|1');
+    });
 });

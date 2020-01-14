@@ -8,6 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @property mixed role
+ * @property mixed username
+ * @property mixed name
+ * @property mixed phone
+ * @property string password
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
