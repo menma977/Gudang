@@ -123,7 +123,7 @@ class UserController extends Controller
             'role' => 'required|numeric',
             'username' => 'required|string|min:6|unique:users',
             'name' => 'required|string',
-            'phone' => 'required|string|min:10|unique:users',
+            'phone' => 'required|numeric|min:10|unique:users',
             'password' => 'required|string|min:6|same:c_password',
             'c_password' => 'required|string|min:6',
         ]);

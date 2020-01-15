@@ -3,46 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Model\Category;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
-        //
+        $category = Category::all();
+
+        $data = [
+            'category' => $category
+        ];
+
+        return view('category.index', $data);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|unique:users',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return Response
      */
     public function show(Category $category)
     {
@@ -52,31 +82,48 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Factory|View
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $id = base64_decode($id);
+        $category = Category::find($id);
+
+        $data = [
+            'category' => $category
+        ];
+
+        return view('category.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $id = base64_decode($id);
+        $this->validate($request, [
+            'name' => 'required|string|unique:users',
+        ]);
+
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return Response
      */
     public function destroy(Category $category)
     {

@@ -58,4 +58,22 @@ Route::middleware('validate')->group(function () {
         Route::get('/edit/{id}', 'StoreController@edit')->name('edit')->middleware('auth', 'role:0|1');
         Route::post('/update/{id}', 'StoreController@update')->name('update')->middleware('auth', 'role:0|1');
     });
+
+    Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+        Route::get('/', 'CategoryController@index')->name('index')->middleware('auth', 'role:0|1');
+        Route::get('/create', 'CategoryController@create')->name('create')->middleware('auth', 'role:0|1');
+        Route::post('/store', 'CategoryController@store')->name('store')->middleware('auth', 'role:0|1');
+        Route::get('/show', 'CategoryController@show')->name('show')->middleware('auth');
+        Route::get('/edit/{id}', 'CategoryController@edit')->name('edit')->middleware('auth', 'role:0|1');
+        Route::post('/update/{id}', 'CategoryController@update')->name('update')->middleware('auth', 'role:0|1');
+    });
+
+    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+        Route::get('/', 'ProductController@index')->name('index')->middleware('auth', 'role:0|1|2|3');
+        Route::get('/create', 'ProductController@create')->name('create')->middleware('auth', 'role:0|1|2|3');
+        Route::post('/store', 'ProductController@store')->name('store')->middleware('auth', 'role:0|1|2|3');
+        Route::get('/show', 'ProductController@show')->name('show')->middleware('auth');
+        Route::get('/edit/{id}', 'ProductController@edit')->name('edit')->middleware('auth', 'role:0|1|2|3');
+        Route::post('/update/{id}', 'ProductController@update')->name('update')->middleware('auth', 'role:0|1|2|3');
+    });
 });

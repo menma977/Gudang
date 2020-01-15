@@ -60,7 +60,7 @@
                                         @foreach ($item->listStore as $subItem)
                                             <tr>
                                                 <td>{{ $subItem->full_name }}</td>
-                                                <td>{{ $subItem->full_address }}</td>
+                                                <td>{!! $subItem->full_address !!}</td>
                                                 <td>{{ $subItem->phone }}</td>
                                                 <td>{{ $subItem->number_ktp }}</td>
                                                 <td>{{ $subItem->ktp }}</td>

@@ -86,3 +86,55 @@
         </li>
     </ul>
 </li>
+
+<li
+    class="nav-item has-treeview {{ request()->is(['category','category/create','category/edit/*','category/delete']) ? 'menu-open' : '' }}">
+    <a href="#"
+       class="nav-link {{ request()->is(['category','category/create','category/edit/*','category/delete']) ? 'active' : '' }}">
+        <i class="nav-icon fas fa-network-wired"></i>
+        <p>
+            Category
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('category.index') }}" class="nav-link {{ request()->is('category') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Index</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('category.create') }}" class="nav-link {{ request()->is('category/create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Buat</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li
+    class="nav-item has-treeview {{ request()->is(['product','product/create','product/edit/*','product/delete']) ? 'menu-open' : '' }}">
+    <a href="#"
+       class="nav-link {{ request()->is(['product','product/create','product/edit/*','product/delete']) ? 'active' : '' }}">
+        <i class="nav-icon fas fa-box"></i>
+        <p>
+            Product
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('product.index') }}" class="nav-link {{ request()->is('product') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Index</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('product.create') }}" class="nav-link {{ request()->is('product/create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Buat</p>
+            </a>
+        </li>
+    </ul>
+</li>
