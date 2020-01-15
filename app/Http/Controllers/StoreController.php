@@ -46,11 +46,16 @@ class StoreController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Factory|View
      */
     public function create()
     {
-        //
+        $routes = Route::all();
+        $data = [
+            'routes' => $routes
+        ];
+
+        return view('store.create', $data);
     }
 
     /**
