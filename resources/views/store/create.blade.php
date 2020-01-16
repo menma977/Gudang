@@ -13,7 +13,7 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('route.index') }}">Toko</a>
+                            <a href="{{ route('store.index') }}">Toko</a>
                         </li>
                         <li class="breadcrumb-item active">Buat</li>
                     </ol>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         @error('ktp')
-                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        <span class="text-danger text-sm" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         @error('ktp_and_user')
-                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        <span class="text-danger text-sm" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
                 </div>

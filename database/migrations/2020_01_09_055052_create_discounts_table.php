@@ -15,7 +15,6 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product');
             //if type == 1
             $table->integer('quantity')->default(0);
             $table->integer('free')->default(0);

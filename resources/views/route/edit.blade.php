@@ -37,7 +37,7 @@
                                 <option value="0">Belum Di Tentukan</option>
                                 @foreach($users as $item)
                                     <option
-                                        value="{{ base64_encode($item->id) }}" {{ $route->user ? ($item->id == $route->user ? 'selected' : '') : '' }} >{{ $item->name }}</option>
+                                        value="{{ $item->id }}" {{ $route->user ? ($item->id == $route->user ? 'selected' : '') : '' }} >{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('sales')

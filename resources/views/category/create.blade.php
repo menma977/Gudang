@@ -13,7 +13,7 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('route.index') }}">Category</a>
+                            <a href="{{ route('category.index') }}">Category</a>
                         </li>
                         <li class="breadcrumb-item active">Buat</li>
                     </ol>

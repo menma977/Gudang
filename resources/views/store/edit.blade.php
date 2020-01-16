@@ -13,7 +13,7 @@
                             <a href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('route.index') }}">Toko</a>
+                            <a href="{{ route('store.index') }}">Toko</a>
                         </li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>
@@ -118,7 +118,7 @@
                             </div>
                             <small>Abaikan jika tidak ingin di rubah</small>
                             @error('ktp')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            <span class="text-danger text-sm" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             </div>
                             <small>Abaikan jika tidak ingin di rubah</small>
                             @error('ktp_and_user')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            <span class="text-danger text-sm" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror
                         </div>
                     </div>

@@ -36,7 +36,7 @@
                                     name="sales" style="width: 100%;">
                                 <option value="0">Belum Di Tentukan</option>
                                 @foreach($users as $item)
-                                    <option value="{{ base64_encode($item->id) }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('sales')

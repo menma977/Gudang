@@ -15,6 +15,7 @@ class CreateLedgerProductsTable extends Migration
     {
         Schema::create('ledger_products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('product')->nullable();
             $table->integer('user');
             $table->integer('approved_storehouse')->default(0);
             $table->integer('approved_admin')->default(0);
