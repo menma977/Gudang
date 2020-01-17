@@ -9,7 +9,6 @@ use App\Model\Product;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -76,6 +75,7 @@ class ProductController extends Controller
                 'quantity' => 'required|numeric',
                 'free' => 'required|numeric',
             ]);
+
             $discount->type = 1;
             $discount->free = $request->free;
             $discount->quantity = $request->quantity;
@@ -84,6 +84,7 @@ class ProductController extends Controller
                 'quantity1' => 'required|numeric',
                 'total' => 'required|numeric|max:100',
             ]);
+
             $discount->type = 2;
             $discount->total = $request->total;
             $discount->quantity = $request->quantity1;
@@ -110,12 +111,15 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Product $product
-     * @return Response
+     * @param $id
+     * @return void
      */
     public function show($id)
     {
         $id = base64_decode($id);
+        $product = Product::find($id);
+        $product->category = Category::find($product->category);
+        $product->discount = Discount::find($product->discount);
     }
 
     /**
@@ -162,6 +166,7 @@ class ProductController extends Controller
             $this->validate($request, [
                 'name' => 'required|string|unique:products',
             ]);
+
             $product->name = $request->name;
         }
 
@@ -172,6 +177,7 @@ class ProductController extends Controller
                 'quantity' => 'required|numeric',
                 'free' => 'required|numeric',
             ]);
+
             $discount->type = 1;
             $discount->free = $request->free;
             $discount->quantity = $request->quantity;
@@ -180,6 +186,7 @@ class ProductController extends Controller
                 'quantity1' => 'required|numeric',
                 'total' => 'required|numeric|max:100',
             ]);
+
             $discount->type = 2;
             $discount->total = $request->total;
             $discount->quantity = $request->quantity1;
@@ -204,11 +211,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Product $product
-     * @return Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        Discount::destroy($product->discount);
+        Product::destroy($id);
+
+        return redirect()->route('product.index');
     }
 }
